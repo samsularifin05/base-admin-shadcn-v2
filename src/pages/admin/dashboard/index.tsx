@@ -10,7 +10,7 @@ import {
   TabsContent,
   TabsList,
   TabsTrigger
-} from "@/components";
+} from "@/shared";
 import { Overview } from "./components/overview";
 import { RecentSales } from "./components/recent-sales";
 // import { UserNav } from "@/components/user-nav";
