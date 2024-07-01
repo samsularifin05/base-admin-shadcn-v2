@@ -14,7 +14,8 @@ rl.question(
   "Masukkan nama file yang ingin Anda perbarui: ",
   async (fileName) => {
     try {
-      // await generateFormState(fileName);
+      await generateFormState(fileName);
+      await editFileIndexPage(fileName);
       createFolderStructure(fileName);
     } catch (error) {
       console.error("Error:", error);
@@ -30,7 +31,8 @@ const generateFormState = async (fileName) => {
     `../src/app/store/model/index.ts`
   );
 
-  const fieldName = fileName;
+  let fieldName = fileName;
+  fieldName = capitalcase(fileName);
 
   try {
     // Baca isi file TypeScript yang sudah ada
@@ -85,6 +87,7 @@ const createFolderStructure = (folderName) => {
     currentFileDir,
     `../src/pages/${folderName}`
   );
+  folderName = capitalcase(folderName);
 
   const foldersToCreate = ["api", "model", "ui"];
 
@@ -103,7 +106,7 @@ const createFolderStructure = (folderName) => {
 
       const indexPath = path.join(subFolderPath, "index.ts");
       if (!fs.existsSync(indexPath)) {
-        fs.writeFileSync(indexPath, "", "utf8");
+        fs.writeFileSync(indexPath, ``, "utf8");
       }
 
       // Tambahkan file request.dto.ts dan response.dto.ts di folder model
@@ -136,7 +139,11 @@ const createFolderStructure = (folderName) => {
     // Buat file index.ts di dalam folder utama
     const mainIndexPath = path.join(baseFolderPath, "index.ts");
     if (!fs.existsSync(mainIndexPath)) {
-      fs.writeFileSync(mainIndexPath, "", "utf8");
+      fs.writeFileSync(
+        mainIndexPath,
+        `export * from "./model";\nexport * from "./api";\nexport * from "./ui";`,
+        "utf8"
+      );
     }
     console.log(`Folder structure for ${folderName} created successfully.`);
     rl.close();
@@ -145,3 +152,41 @@ const createFolderStructure = (folderName) => {
     rl.close();
   }
 };
+const editFileIndexPage = async (folderName) => {
+  // const indexPath = path.resolve(__dirname, "../src/pages/index.ts");
+  const currentFileDir = path.dirname(new URL(import.meta.url).pathname);
+  const indexPath = path.resolve(currentFileDir, `../src/pages/index.ts`);
+
+  try {
+    // Baca isi file index.ts
+    let data = await readFile(indexPath, "utf8");
+
+    // Tambahkan export statement jika belum ada
+    let newData = data;
+
+    // Periksa apakah sudah ada ekspor dari foldername
+    const regex = new RegExp(
+      `export\\s*\\*\\s*from\\s*"\\.\\/(${folderName})";`,
+      "g"
+    );
+    if (!regex.test(newData)) {
+      // Tambahkan ekspor baru
+      newData += `export * from "./${folderName}";\n`;
+
+      // Tulis perubahan kembali ke file index.ts
+      await writeFile(indexPath, newData, "utf8");
+      console.log(`Export to ${folderName} added successfully.`);
+    } else {
+      console.log(`Export to ${folderName} already exists.`);
+    }
+  } catch (err) {
+    console.error("Error:", err);
+  }
+};
+
+function capitalcase(str) {
+  if (typeof str !== "string") {
+    throw new Error("Input harus berupa string");
+  }
+  return str.charAt(0).toUpperCase() + str.slice(1);
+}

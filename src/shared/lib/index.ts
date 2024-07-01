@@ -6,5 +6,6 @@ export * from "./utils";
 export * from "./helper";
 export * from "./toast";
 export * from "./axsios";
+export * from "./localStroage";
 
 export { useIsCollapsed, useCheckActiveNav };

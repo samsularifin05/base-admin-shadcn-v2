@@ -1,16 +1,23 @@
 import { AppDispatch, AppThunk, themesActions, utilityActions } from "@/app";
-import { FormLoginDto } from "../model";
-import { ToastNotificationInfo, timoutDelay } from "@/shared";
+import { FormLoginDto, ResponseLoginDto } from "../model";
+import { ToastNotificationInfo, apiInstance, urlApi } from "@/shared";
+import { setItem } from "@/shared";
 
 export const loginAction = (data: FormLoginDto): AppThunk => {
   return async (dispatch: AppDispatch) => {
     dispatch(utilityActions.setLoading({ screen: true }));
-
-    timoutDelay(300);
-    if (data.user_id === "admin" && data.password === "123") {
+    try {
+      dispatch(utilityActions.setLoading({ screen: true }));
+      const result = await apiInstance.post<ResponseLoginDto>(
+        urlApi.auth,
+        data
+      );
+      setItem("userdata", result.data);
       dispatch(themesActions.setIsLogin(true));
-    } else {
-      ToastNotificationInfo("User id dan password salah");
+      dispatch(utilityActions.stopLoading());
+    } catch (error) {
+      dispatch(utilityActions.stopLoading());
+      ToastNotificationInfo(`${error}`);
     }
   };
 };

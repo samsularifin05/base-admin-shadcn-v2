@@ -19,6 +19,7 @@ export function UserNav() {
   const dispatch = useDispatch<AppDispatch>();
 
   const logout = () => {
+    localStorage.clear();
     dispatch(themesActions.setIsLogin(false));
     navigae("/");
   };
