@@ -1,16 +1,18 @@
 import { AppDispatch, AppThunk, themesActions, utilityActions } from "@/app";
-import { FormLoginDto, ResponseLoginDto } from "../model";
+import { ResponseLoginDto } from "../model";
 import { ToastNotificationInfo, apiInstance, urlApi } from "@/shared";
 import { setItem } from "@/shared";
 
-export const loginAction = (data: FormLoginDto): AppThunk => {
-  return async (dispatch: AppDispatch) => {
+export const loginAction = (): AppThunk => {
+  return async (dispatch: AppDispatch, getState) => {
+    const state = getState();
+    const formValues = state.form.LoginForm;
     dispatch(utilityActions.setLoading({ screen: true }));
     try {
       dispatch(utilityActions.setLoading({ screen: true }));
       const result = await apiInstance.post<ResponseLoginDto>(
         urlApi.auth,
-        data
+        formValues
       );
       setItem("userdata", result.data);
       dispatch(themesActions.setIsLogin(true));

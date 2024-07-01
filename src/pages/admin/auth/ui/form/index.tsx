@@ -3,7 +3,7 @@ import { Navigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { AppDispatch, useAppSelector } from "@/app";
 import { validLoginSchema } from "./validate";
-import { FormLoginDto, intitalFormLogin } from "../../model";
+import { intitalFormLogin } from "../../model";
 import { loginAction } from "../../api";
 
 const FormLogin = () => {
@@ -11,8 +11,8 @@ const FormLogin = () => {
   const theme = useAppSelector((state) => state.theme);
   const dispatch = useDispatch<AppDispatch>();
 
-  function onSubmit(data: FormLoginDto) {
-    dispatch(loginAction(data));
+  function onSubmit() {
+    dispatch(loginAction());
   }
 
   if (theme.getIsLogin) {
