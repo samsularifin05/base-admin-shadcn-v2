@@ -3,12 +3,13 @@ import { Navigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { AppDispatch, useAppSelector } from "@/app";
 import { validLoginSchema } from "./validate";
-import { intitalFormLogin } from "../../model";
 import { loginAction } from "../../api";
 
 const FormLogin = () => {
   const utility = useAppSelector((state) => state.utility);
   const theme = useAppSelector((state) => state.theme);
+  const formValues = useAppSelector((state) => state.form.LoginForm);
+
   const dispatch = useDispatch<AppDispatch>();
 
   function onSubmit() {
@@ -25,7 +26,7 @@ const FormLogin = () => {
         formName={"LoginForm"}
         onSubmit={onSubmit}
         validate={validLoginSchema}
-        intitalFormLogin={intitalFormLogin}
+        initialValues={formValues}
       >
         {({ form }) => (
           <>

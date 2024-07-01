@@ -17,10 +17,9 @@ import { FormState } from "@/app/store/model";
 interface FormPanelProps<FormValues extends FieldValues> {
   formName: keyof FormState;
   onSubmit: (values: FormValues) => void;
-  initialValues?: FormValues;
+  initialValues?: DefaultValues<FormValues>;
   children: (props: { form: UseFormReturn<FormValues> }) => React.ReactNode;
   validate: yup.ObjectSchema<FormValues>;
-  intitalFormLogin: DefaultValues<FormValues>;
 }
 
 const FormPanel = <FormValues extends FieldValues>({
@@ -28,14 +27,16 @@ const FormPanel = <FormValues extends FieldValues>({
   children,
   validate,
   formName,
-  intitalFormLogin
+  initialValues
 }: FormPanelProps<FormValues>): JSX.Element => {
   const dispatch = useDispatch<AppDispatch>();
 
   const form = useForm<FormValues>({
     resolver: yupResolver(validate) as unknown as Resolver<FormValues>,
-    defaultValues: intitalFormLogin
+    defaultValues: initialValues,
+    mode: "onChange"
   });
+
   useEffect(() => {
     const watchSubscription = form.watch(async (values) => {
       try {
@@ -49,7 +50,7 @@ const FormPanel = <FormValues extends FieldValues>({
     });
 
     return () => {
-      watchSubscription.unsubscribe(); // Ensure proper cleanup
+      watchSubscription.unsubscribe();
     };
   }, [form, dispatch, validate, formName]);
 
