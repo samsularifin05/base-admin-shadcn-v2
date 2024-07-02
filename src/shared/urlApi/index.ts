@@ -5,4 +5,6 @@ export const urlApi = {
     jenis: "jenis",
     kategori: "kategori"
   }
+,
+  masterkuda:"masterkuda",
 };

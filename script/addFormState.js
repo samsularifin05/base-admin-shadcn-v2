@@ -160,6 +160,43 @@ const createFolderStructure = (folderName) => {
           `import ${folderName} from "./form${folderName}";\nexport * from "./form";\nexport { ${folderName} };\n`,
           "utf8"
         );
+
+        const formFolderPath = path.join(subFolderPath, "form");
+        const tableFolderPath = path.join(subFolderPath, "table");
+        if (!fs.existsSync(formFolderPath)) {
+          fs.mkdirSync(formFolderPath, { recursive: true });
+        }
+        if (!fs.existsSync(tableFolderPath)) {
+          fs.mkdirSync(tableFolderPath, { recursive: true });
+        }
+
+        // Buat file index.tsx di dalam folder form
+        const formIndexPath = path.join(formFolderPath, "index.tsx");
+        fs.writeFileSync(
+          formIndexPath,
+          `import { Button, cn, FormPanel, RenderField } from "@/shared";\nimport { useAppSelector } from "@/app";\nimport { validate${folderName} } from "./validate";\n\nconst ${folderName} = () => {\n  const utility = useAppSelector((state) => state.utility);\n  const formValues = useAppSelector((state) => state.form.${capitalcase(
+            folderName
+          )});\n\n  function onSubmit() {}\n\n  return (\n    <div className={cn("grid gap-6")}>\n      <FormPanel\n        formName={"${capitalcase(
+            folderName
+          )}"}\n        onSubmit={onSubmit}\n        validate={validate${folderName}}\n        initialValues={formValues}\n      >\n        {({ form }) => (\n          <>\n            <div className="grid gap-2">\n              <RenderField\n                control={form.control}\n                label="Name"\n                placeholder="Masukan Name"\n                name="name"\n              />\n\n              <Button\n                type="submit"\n                className="mt-2"\n                loading={utility.getLoading.button}\n              >\n                Login\n              </Button>\n            </div>\n          </>\n        )}\n      </FormPanel>\n    </div>\n  );\n};\n\nexport default ${folderName};\n`,
+          "utf8"
+        );
+
+        // Buat file index.tsx di dalam folder table
+        const tableIndexPath = path.join(tableFolderPath, "index.tsx");
+        fs.writeFileSync(
+          tableIndexPath,
+          `export { default } from "./table${folderName}";\n`,
+          "utf8"
+        );
+
+        // Buat file column.tsx di dalam folder table
+        const tableColumnPath = path.join(tableFolderPath, "column.tsx");
+        fs.writeFileSync(
+          tableColumnPath,
+          `import { Column } from "react-table";\n\nexport const columns: Column[] = [\n  { Header: "Name", accessor: "name" }\n];\n`,
+          "utf8"
+        );
         const formData = path.join(subFolderPath, `form${folderName}.tsx`);
         const masterFormIndex = `import { ModalGlobal, PanelAdmin } from "@/shared";\nimport Form${folderName} from "./form";\nimport { useAppSelector } from "@/app";\nimport Table${folderName} from "./table";\n\nconst ${folderName} = () => {\n  const modal = useAppSelector((state) => state.utility.getModal);\n\n  return (\n    <PanelAdmin>\n      <Table${folderName} />\n      <ModalGlobal\n        title={\`\${modal.isEdit ? "Edit" : "Tambah"} Data\`}\n        size="medium"\n        namaForm={"${folderName}"}\n      >\n        <Form${folderName} />\n      </ModalGlobal>\n    </PanelAdmin>\n  );\n};\n\nexport default ${folderName};\n`;
         fs.writeFileSync(formData, masterFormIndex, "utf8");
@@ -174,6 +211,18 @@ const createFolderStructure = (folderName) => {
         `export * from "./model";\nexport * from "./redux";\nexport * from "./ui";\nexport * from "./service";`,
         "utf8"
       );
+    }
+    const urlApiPath = path.resolve(
+      currentFileDir,
+      "../src/shared/urlApi/index.ts"
+    );
+    if (fs.existsSync(urlApiPath)) {
+      const urlApiContent = fs.readFileSync(urlApiPath, "utf8");
+      const updatedUrlApiContent = urlApiContent.replace(
+        /};\s*$/,
+        `,\n  ${folderName.toLowerCase()}:"${folderName.toLowerCase()}",\n};`
+      );
+      fs.writeFileSync(urlApiPath, updatedUrlApiContent, "utf8");
     }
     console.log(`Folder structure for ${folderName} created successfully.`);
     rl.close();
