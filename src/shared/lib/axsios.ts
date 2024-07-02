@@ -23,16 +23,15 @@ class ApiInstance {
   constructor() {
     this.axios = axios.create({
       baseURL: VITE_APP_BE_URL,
-      timeout: 120000,
+      // timeout: 120000,
       headers: {
         "Content-Type": "application/json",
         timestamp: this.timestamp,
         signature: this.signature,
         user_id: this.datauser?.user_id,
-        Authorization:
-          this.datauser && this.datauser.access_token
-            ? `Bearer ${this.datauser.access_token}`
-            : undefined
+        Authorization: this.datauser.access_token
+          ? `Bearer ${this.datauser.access_token}`
+          : undefined
       }
     });
   }
@@ -82,7 +81,7 @@ class ApiInstance {
         }
 
         if (errorRegex.test(message)) {
-          this.logout();
+          // this.logout();
         }
 
         throw new Error(message);
@@ -96,12 +95,12 @@ class ApiInstance {
     }
   }
 
-  private logout = async () => {
-    setTimeout(() => {
-      localStorage.clear();
-      window.location.reload();
-    }, 3000);
-  };
+  // private logout = async () => {
+  //   setTimeout(() => {
+  //     localStorage.clear();
+  //     window.location.reload();
+  //   }, 3000);
+  // };
 
   private refreshToken = async (): Promise<RefresTokenInterFace> => {
     try {

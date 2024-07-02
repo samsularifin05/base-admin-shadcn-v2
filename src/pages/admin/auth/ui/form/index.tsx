@@ -3,7 +3,7 @@ import { Navigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { AppDispatch, useAppSelector } from "@/app";
 import { validLoginSchema } from "./validate";
-import { loginAction } from "../../api";
+import { loginAction } from "../../service";
 
 const FormLogin = () => {
   const utility = useAppSelector((state) => state.utility);

@@ -16,6 +16,15 @@ const router = createBrowserRouter([
         lazy: async () => ({
           Component: (await import("../../pages/admin/dashboard")).default
         })
+      },
+      {
+        index: true,
+        path: "master-data",
+        lazy: async () => ({
+          Component: (
+            await import("../../pages/admin/masterData/ui/formMasterData.tsx")
+          ).default
+        })
       }
     ]
   },

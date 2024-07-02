@@ -44,9 +44,9 @@ export const sidelinks: SideLink[] = [
     icon: <IconUserShield size={18} />,
     sub: [
       {
-        title: "Master User",
+        title: "Master data",
         label: "",
-        href: "/admin/master-user"
+        href: "/admin/master-data"
       }
     ]
   },
