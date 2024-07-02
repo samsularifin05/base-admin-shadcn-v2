@@ -89,7 +89,7 @@ const createFolderStructure = (folderName) => {
   );
   folderName = capitalcase(folderName);
 
-  const foldersToCreate = ["api", "model", "ui"];
+  const foldersToCreate = ["redux", "service", "model", "ui"];
 
   try {
     // Buat folder utama
@@ -134,6 +134,36 @@ const createFolderStructure = (folderName) => {
           "utf8"
         );
       }
+      if (subFolder === "redux") {
+        const typePathRedux = path.join(subFolderPath, "type.ts");
+        if (!fs.existsSync(typePathRedux)) {
+          const typeContent = `import { Response${folderName}Dto } from "../model";\nexport interface Get${folderName}Dto {\n  data: Response${folderName}Dto[];\n  count: number;\n}\n\nexport interface ${folderName} {\n  get${folderName}: Get${folderName}Dto;\n}\n\nexport const initialState: ${folderName} = {\n  get${folderName}: {\n    data: [],\n    count: 0\n  }\n};\n`;
+          fs.writeFileSync(typePathRedux, typeContent, "utf8");
+        }
+        const reduxIndex = path.join(subFolderPath, "index.ts");
+        const indexReduxContent = `import { createSlice, PayloadAction } from "@reduxjs/toolkit";\nimport { Get${folderName}Dto, initialState } from "./type";\n\nconst ${folderName}Reducer = createSlice({\n  name: "${folderName}",\n  initialState,\n  reducers: {\n    set${folderName}(state, action: PayloadAction<Get${folderName}Dto>) {\n      state.get${folderName} = action.payload;\n    }\n  }\n});\n\nconst { set${folderName} } = ${folderName}Reducer.actions;\n\nexport { set${folderName} };\n\nexport default ${folderName}Reducer.reducer;\n`;
+        fs.writeFileSync(reduxIndex, indexReduxContent, "utf8");
+      }
+
+      if (subFolder === "service") {
+        const serviceIndex = path.join(subFolderPath, "index.ts");
+        const serviceIndexContent = `import { AppDispatch, AppThunk, utilityActions } from "@/app";\nimport { apiInstance, urlApi } from "@/shared";\nimport { Response${folderName}Dto } from "../model";\nimport { set${folderName} } from "../redux";\n\nexport const service${folderName} = () => {\n  const get${folderName} = (): AppThunk => {\n    return async (dispatch: AppDispatch) => {\n      dispatch(utilityActions.setLoading({ table: true }));\n      try {\n        const response = await apiInstance.get<Response${folderName}Dto[]>(\n          urlApi.${camelCase(
+          folderName
+        )}\n        );\n        dispatch(set${folderName}({ data: response.data, count: response.count }));\n      } catch (error) {\n        dispatch(set${folderName}({ data: [], count: 0 }));\n      } finally {\n        dispatch(utilityActions.stopLoading());\n      }\n    };\n  };\n  return {\n    get${folderName}\n  };\n};\n\n`;
+        fs.writeFileSync(serviceIndex, serviceIndexContent, "utf8");
+      }
+
+      if (subFolder === "ui") {
+        const uiIndex = path.join(subFolderPath, "index.ts");
+        fs.writeFileSync(
+          uiIndex,
+          `import ${folderName} from "./form${folderName}";\nexport * from "./form";\nexport { ${folderName} };\n`,
+          "utf8"
+        );
+        const formData = path.join(subFolderPath, `form${folderName}.tsx`);
+        const masterFormIndex = `import { ModalGlobal, PanelAdmin } from "@/shared";\nimport Form${folderName} from "./form";\nimport { useAppSelector } from "@/app";\nimport Table${folderName} from "./table";\n\nconst ${folderName} = () => {\n  const modal = useAppSelector((state) => state.utility.getModal);\n\n  return (\n    <PanelAdmin>\n      <Table${folderName} />\n      <ModalGlobal\n        title={\`\${modal.isEdit ? "Edit" : "Tambah"} Data\`}\n        size="medium"\n        namaForm={"${folderName}"}\n      >\n        <Form${folderName} />\n      </ModalGlobal>\n    </PanelAdmin>\n  );\n};\n\nexport default ${folderName};\n`;
+        fs.writeFileSync(formData, masterFormIndex, "utf8");
+      }
     });
 
     // Buat file index.ts di dalam folder utama
@@ -141,7 +171,7 @@ const createFolderStructure = (folderName) => {
     if (!fs.existsSync(mainIndexPath)) {
       fs.writeFileSync(
         mainIndexPath,
-        `export * from "./model";\nexport * from "./api";\nexport * from "./ui";`,
+        `export * from "./model";\nexport * from "./redux";\nexport * from "./ui";\nexport * from "./service";`,
         "utf8"
       );
     }
@@ -189,4 +219,25 @@ function capitalcase(str) {
     throw new Error("Input harus berupa string");
   }
   return str.charAt(0).toUpperCase() + str.slice(1);
+}
+function camelCase(str) {
+  if (typeof str !== "string") {
+    throw new Error("Input harus berupa string");
+  }
+
+  // Pisahkan kata-kata berdasarkan spasi atau underscore
+  let words = str.split(/[\s_]+/);
+
+  // Ubah huruf pertama setiap kata kecil ke huruf kapital kecuali kata pertama
+  let camelCasedString = words
+    .map((word, index) => {
+      if (index === 0) {
+        return word.toLowerCase(); // Huruf pertama kata pertama tetap kecil
+      } else {
+        return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+      }
+    })
+    .join("");
+
+  return camelCasedString;
 }
