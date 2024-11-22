@@ -20,6 +20,21 @@ const formsSlice = createSlice({
 
       state[form] = { ...state[form], ...validValues };
     },
+    setValue: <T extends keyof FormState>(
+      state: FormState,
+      action: PayloadAction<{ form: T; values: Partial<FormState[T]> }>
+    ) => {
+      const { form, values } = action.payload;
+
+      const validValues = Object.keys(values).reduce((acc, key) => {
+        if (key in state[form]) {
+          acc[key as keyof FormState[T]] = values[key as keyof FormState[T]];
+        }
+        return acc;
+      }, {} as Partial<FormState[T]>);
+
+      state[form] = { ...state[form], ...validValues };
+    },
     resetForm: <T extends keyof FormState>(
       state: FormState,
       action: PayloadAction<keyof FormState>
@@ -30,9 +45,10 @@ const formsSlice = createSlice({
   }
 });
 
-export const { updateForm, resetForm } = formsSlice.actions;
+export const { updateForm, resetForm, setValue } = formsSlice.actions;
 export const formActions = {
   updateForm,
-  resetForm
+  resetForm,
+  setValue
 };
 export default formsSlice.reducer;

@@ -1,20 +1,33 @@
 import { Button, cn, FormPanel, RenderField } from "@/shared";
 import { Navigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { AppDispatch, useAppSelector } from "@/app";
+import { AppDispatch, formActions, useAppSelector } from "@/app";
 import { validLoginSchema } from "./validate";
 import { loginAction } from "../../service";
+import { useEffect } from "react";
 
 const FormLogin = () => {
   const utility = useAppSelector((state) => state.utility);
   const theme = useAppSelector((state) => state.theme);
-  const formValues = useAppSelector((state) => state.form.LoginForm);
 
   const dispatch = useDispatch<AppDispatch>();
 
   function onSubmit() {
     dispatch(loginAction());
   }
+
+  // This useEffect updates the initial form values to simulate pre-filled data
+  useEffect(() => {
+    dispatch(
+      formActions.updateForm({
+        form: "LoginForm",
+        values: {
+          user_id: "admin@gmail.com",
+          password: "admin1234"
+        }
+      })
+    );
+  }, [dispatch]);
 
   if (theme.getIsLogin) {
     return <Navigate to={"/admin/dashboard"} />;
@@ -26,7 +39,6 @@ const FormLogin = () => {
         formName={"LoginForm"}
         onSubmit={onSubmit}
         validate={validLoginSchema}
-        initialValues={formValues}
       >
         {({ form }) => (
           <>

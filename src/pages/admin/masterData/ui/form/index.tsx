@@ -5,7 +5,7 @@ import { validateFormMasterData } from "./validate";
 
 const FormMasterData = () => {
   const utility = useAppSelector((state) => state.utility);
-  const formValues = useAppSelector((state) => state.form.FormMasterData);
+  // const formValues = useAppSelector((state) => state.form.FormMasterData);
 
   function onSubmit() {}
 
@@ -15,7 +15,6 @@ const FormMasterData = () => {
         formName={"LoginForm"}
         onSubmit={onSubmit}
         validate={validateFormMasterData}
-        initialValues={formValues}
       >
         {({ form }) => (
           <>
