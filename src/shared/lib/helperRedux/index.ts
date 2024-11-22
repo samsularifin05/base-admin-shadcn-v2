@@ -1,4 +1,4 @@
-import { AppDispatch, AppThunk, utilityActions } from "@/app";
+import { AppDispatch, AppThunk, utilityActions } from '@/app';
 
 export const utilityController = <T>() => {
   const showModal = (namaForm: string, data?: T): AppThunk => {
@@ -6,7 +6,7 @@ export const utilityController = <T>() => {
       dispatch(
         utilityActions.showModal({
           isModalShow: true,
-          isEdit: namaForm === "EDIT" ? true : false,
+          isEdit: namaForm === 'EDIT' ? true : false,
           data: data || [],
           namaForm: namaForm
         })
@@ -20,7 +20,7 @@ export const utilityController = <T>() => {
           isModalShow: false,
           isEdit: false,
           data: [],
-          namaForm: ""
+          namaForm: ''
         })
       );
     };

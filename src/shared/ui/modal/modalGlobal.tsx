@@ -1,19 +1,19 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from 'react';
 
-import { useDispatch } from "react-redux";
-import { Cross1Icon } from "@radix-ui/react-icons";
-import { FormState } from "@/app/store/model";
+import { useDispatch } from 'react-redux';
+import { Cross1Icon } from '@radix-ui/react-icons';
+import { FormState } from '@/app/store/model';
 import {
   AppDispatch,
   formActions,
   useAppSelector,
   utilityActions
-} from "@/app";
+} from '@/app';
 
 interface Props {
   title: string;
   namaForm: keyof FormState;
-  size?: "small" | "medium" | "large";
+  size?: 'small' | 'medium' | 'large';
   children: React.ReactNode;
 }
 
@@ -41,19 +41,19 @@ const ModalGlobal = (props: Props) => {
 
   if (!isVisible && !isAnimating) return null;
 
-  let modalSizeClass = "";
+  let modalSizeClass = '';
   switch (size) {
-    case "small":
-      modalSizeClass = "lg:w-[30%]";
+    case 'small':
+      modalSizeClass = 'lg:w-[30%]';
       break;
-    case "medium":
-      modalSizeClass = "lg:w-[50%]";
+    case 'medium':
+      modalSizeClass = 'lg:w-[50%]';
       break;
-    case "large":
-      modalSizeClass = "lg:w-[70%]";
+    case 'large':
+      modalSizeClass = 'lg:w-[70%]';
       break;
     default:
-      modalSizeClass = "lg:w-[50%]"; // Default to medium size
+      modalSizeClass = 'lg:w-[50%]'; // Default to medium size
       break;
   }
 
@@ -61,15 +61,15 @@ const ModalGlobal = (props: Props) => {
     <div
       className={`fixed inset-0 z-50  flex items-center justify-center transition-opacity ${
         utility.getModal.isModalShow
-          ? "bg-black/50 opacity-100"
-          : "bg-black/20 opacity-0"
+          ? 'bg-black/50 opacity-100'
+          : 'bg-black/20 opacity-0'
       }`}
     >
       <div
         className={`fixed shadow-lg p-4 top-[10%] bg-white rounded w-[90%] ${modalSizeClass}  flex-col gap-5 transform transition-transform ${
           utility.getModal.isModalShow
-            ? "animate-slideInDown"
-            : "animate-slideOutUp"
+            ? 'animate-slideInDown'
+            : 'animate-slideOutUp'
         }`}
       >
         <div className="flex justify-between">

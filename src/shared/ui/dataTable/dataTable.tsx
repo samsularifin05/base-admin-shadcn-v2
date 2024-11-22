@@ -9,7 +9,7 @@ import {
   getPaginationRowModel,
   getSortedRowModel,
   useReactTable
-} from "@tanstack/react-table";
+} from '@tanstack/react-table';
 
 import {
   Table,
@@ -19,16 +19,16 @@ import {
   TableHeader,
   TableRow,
   cn
-} from "@/shared";
-import { useState } from "react";
-import { DataTablePagination } from "./dataTablePagination";
-import { DataTableViewOptions } from "./dataTableViewOptions";
-import { GlobalFilter } from "./globalFilter";
-import { useDispatch } from "react-redux";
-import { PlusIcon } from "@radix-ui/react-icons";
-import { Button } from "../custom";
-import { Loader2 } from "lucide-react";
-import { AppDispatch, useAppSelector, utilityActions } from "@/app";
+} from '@/shared';
+import { useState } from 'react';
+import { DataTablePagination } from './dataTablePagination';
+import { DataTableViewOptions } from './dataTableViewOptions';
+import { GlobalFilter } from './globalFilter';
+import { useDispatch } from 'react-redux';
+import { PlusIcon } from '@radix-ui/react-icons';
+import { Button } from '../custom';
+import { Loader2 } from 'lucide-react';
+import { AppDispatch, useAppSelector, utilityActions } from '@/app';
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -90,7 +90,7 @@ export function DataTable<TData, TValue>({
                   isModalShow: true,
                   isEdit: false,
                   data: [],
-                  namaForm: "LoginForm"
+                  namaForm: 'LoginForm'
                 })
               )
             }
@@ -131,7 +131,7 @@ export function DataTable<TData, TValue>({
                   <div className="flex justify-center">
                     <Loader2
                       className={cn(
-                        "h-5 w-5 text-primary/60 animate-spin mr-2"
+                        'h-5 w-5 text-primary/60 animate-spin mr-2'
                       )}
                     />
                     Loading...
@@ -142,7 +142,7 @@ export function DataTable<TData, TValue>({
               table.getRowModel().rows.map((row) => (
                 <TableRow
                   key={row.id}
-                  data-state={row.getIsSelected() && "selected"}
+                  data-state={row.getIsSelected() && 'selected'}
                 >
                   {row.getVisibleCells().map((cell) => (
                     <TableCell key={cell.id}>

@@ -1,4 +1,4 @@
-import { Button } from "@/shared/ui/custom/button";
+import { Button } from '@/shared/ui/custom/button';
 
 export default function MaintenanceError() {
   return (

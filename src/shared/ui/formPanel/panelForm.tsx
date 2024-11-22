@@ -1,17 +1,17 @@
-import React, { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import React, { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 import {
   useForm,
   FieldValues,
   UseFormReturn,
   DefaultValues,
   Resolver
-} from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
-import { Form } from "../";
-import * as yup from "yup";
-import { AppDispatch, formActions, useAppSelector } from "@/app";
-import { FormState } from "@/app/store/model";
+} from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { Form } from '../';
+import * as yup from 'yup';
+import { AppDispatch, formActions, useAppSelector } from '@/app';
+import { FormState } from '@/app/store/model';
 
 interface FormPanelProps<FormValues extends FieldValues> {
   formName: keyof FormState;
@@ -37,7 +37,7 @@ const FormPanel = <FormValues extends FieldValues>({
   const form = useForm<FormValues>({
     resolver: yupResolver(validate) as unknown as Resolver<FormValues>,
     defaultValues: initialValues,
-    mode: "onChange"
+    mode: 'onChange'
   });
 
   // UseEffect to reset form values when initialValues change

@@ -4,6 +4,6 @@ export interface FormLoginDto {
 }
 
 export const intitalFormLogin: FormLoginDto = {
-  user_id: "",
-  password: ""
+  user_id: '',
+  password: ''
 };

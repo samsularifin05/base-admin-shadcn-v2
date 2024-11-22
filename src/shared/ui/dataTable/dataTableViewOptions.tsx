@@ -1,8 +1,8 @@
-"use client";
+'use client';
 
-import { DropdownMenuTrigger } from "@radix-ui/react-dropdown-menu";
-import { MixerHorizontalIcon } from "@radix-ui/react-icons";
-import { Table } from "@tanstack/react-table";
+import { DropdownMenuTrigger } from '@radix-ui/react-dropdown-menu';
+import { MixerHorizontalIcon } from '@radix-ui/react-icons';
+import { Table } from '@tanstack/react-table';
 
 import {
   Button,
@@ -11,7 +11,7 @@ import {
   DropdownMenuContent,
   DropdownMenuLabel,
   DropdownMenuSeparator
-} from "@/shared";
+} from '@/shared';
 
 interface DataTableViewOptionsProps<TData> {
   table: Table<TData>;
@@ -39,7 +39,7 @@ export function DataTableViewOptions<TData>({
           .getAllColumns()
           .filter(
             (column) =>
-              typeof column.accessorFn !== "undefined" && column.getCanHide()
+              typeof column.accessorFn !== 'undefined' && column.getCanHide()
           )
           .map((column) => {
             return (

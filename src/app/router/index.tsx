@@ -1,44 +1,44 @@
-import { NotFoundError } from "@/pages";
-import { createBrowserRouter } from "react-router-dom";
+import { NotFoundError } from '@/pages';
+import { createBrowserRouter } from 'react-router-dom';
 
 const router = createBrowserRouter([
   {
-    path: "/admin",
+    path: '/admin',
     lazy: async () => {
-      const AppShell = await import("../../shared/ui/theme/app-shell");
+      const AppShell = await import('../../shared/ui/theme/app-shell');
       return { Component: AppShell.default };
     },
     errorElement: <NotFoundError />,
     children: [
       {
         index: true,
-        path: "dashboard",
+        path: 'dashboard',
         lazy: async () => ({
-          Component: (await import("../../pages/admin/dashboard")).default
+          Component: (await import('../../pages/admin/dashboard')).default
         })
       },
       {
         index: true,
-        path: "master-data",
+        path: 'master-data',
         lazy: async () => ({
           Component: (
-            await import("../../pages/admin/masterData/ui/formMasterData.tsx")
+            await import('../../pages/admin/masterData/ui/formMasterData.tsx')
           ).default
         })
       }
     ]
   },
   {
-    path: "/",
+    path: '/',
     lazy: async () => ({
-      Component: (await import("../../pages/admin/auth/ui/index")).default
+      Component: (await import('../../pages/admin/auth/ui/index')).default
     })
   },
 
   {
-    path: "*",
+    path: '*',
     lazy: async () => ({
-      Component: (await import("../../pages/errors/not-found-error")).default
+      Component: (await import('../../pages/errors/not-found-error')).default
     })
   }
 ]);

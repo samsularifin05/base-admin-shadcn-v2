@@ -1,5 +1,5 @@
-import { useNavigate } from "react-router-dom";
-import { Button, cn } from "@/shared";
+import { useNavigate } from 'react-router-dom';
+import { Button, cn } from '@/shared';
 
 interface GeneralErrorProps extends React.HTMLAttributes<HTMLDivElement> {
   minimal?: boolean;
@@ -11,7 +11,7 @@ export default function GeneralError({
 }: GeneralErrorProps) {
   const navigate = useNavigate();
   return (
-    <div className={cn("h-svh w-full", className)}>
+    <div className={cn('h-svh w-full', className)}>
       <div className="flex flex-col items-center justify-center w-full h-full gap-2 m-auto">
         {!minimal && (
           <h1 className="text-[7rem] font-bold leading-tight">500</h1>
@@ -25,7 +25,7 @@ export default function GeneralError({
             <Button variant="outline" onClick={() => navigate(-1)}>
               Go Back
             </Button>
-            <Button onClick={() => navigate("/")}>Back to Home</Button>
+            <Button onClick={() => navigate('/')}>Back to Home</Button>
           </div>
         )}
       </div>

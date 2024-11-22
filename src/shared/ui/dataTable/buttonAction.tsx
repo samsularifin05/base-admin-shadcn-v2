@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState } from 'react';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -15,12 +15,12 @@ import {
   AlertDialogCancel,
   AlertDialogTitle,
   AlertDialogDescription
-} from "@/shared";
-import { Button } from "../custom";
-import { MoreHorizontal } from "lucide-react";
+} from '@/shared';
+import { Button } from '../custom';
+import { MoreHorizontal } from 'lucide-react';
 
 interface Props {
-  items: Array<{ key: "Delete" | "Edit" | string; onClick: () => void }>;
+  items: Array<{ key: 'Delete' | 'Edit' | string; onClick: () => void }>;
 }
 
 const ButtonAction = ({ items }: Props) => {
@@ -67,7 +67,7 @@ const ButtonAction = ({ items }: Props) => {
               key={index}
               className="cursor-pointer"
               onClick={() =>
-                item.key === "Delete" ? handleDeleteClick(item) : item.onClick()
+                item.key === 'Delete' ? handleDeleteClick(item) : item.onClick()
               }
             >
               {item.key}

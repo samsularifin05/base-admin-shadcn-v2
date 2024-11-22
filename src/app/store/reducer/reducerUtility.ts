@@ -1,4 +1,4 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 interface LoadingState {
   table?: boolean;
@@ -33,13 +33,13 @@ const initialState = <T>(): UtilityState<T> => ({
     isModalShow: false,
     isEdit: false,
     data: [],
-    namaForm: ""
+    namaForm: ''
   },
   hideModal: {
     isModalShow: false,
     isEdit: false,
     data: [],
-    namaForm: ""
+    namaForm: ''
   },
   setLoadingTabel: false,
   getShowButtonDelete: false,
@@ -48,7 +48,7 @@ const initialState = <T>(): UtilityState<T> => ({
 });
 
 const utilitySlice = createSlice({
-  name: "utility",
+  name: 'utility',
   initialState: initialState,
   reducers: {
     showButtonDelete(state, action: PayloadAction<boolean>) {
@@ -76,7 +76,7 @@ const utilitySlice = createSlice({
         isModalShow: false,
         isEdit: false,
         data: [],
-        namaForm: ""
+        namaForm: ''
       };
     },
     showModal<T>(

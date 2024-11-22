@@ -1,8 +1,8 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { FormState, initialState } from "../model";
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { FormState, initialState } from '../model';
 
 const formsSlice = createSlice({
-  name: "forms",
+  name: 'forms',
   initialState,
   reducers: {
     setValue: <T extends keyof FormState>(
@@ -11,12 +11,15 @@ const formsSlice = createSlice({
     ) => {
       const { form, values } = action.payload;
 
-      const validValues = Object.keys(values).reduce((acc, key) => {
-        if (key in state[form]) {
-          acc[key as keyof FormState[T]] = values[key as keyof FormState[T]];
-        }
-        return acc;
-      }, {} as Partial<FormState[T]>);
+      const validValues = Object.keys(values).reduce(
+        (acc, key) => {
+          if (key in state[form]) {
+            acc[key as keyof FormState[T]] = values[key as keyof FormState[T]];
+          }
+          return acc;
+        },
+        {} as Partial<FormState[T]>
+      );
 
       state[form] = { ...state[form], ...validValues };
     },

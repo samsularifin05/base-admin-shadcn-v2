@@ -1,7 +1,7 @@
-import { Button, cn, FormPanel, RenderField } from "@/shared";
-import {} from "react-redux";
-import { useAppSelector } from "@/app";
-import { validateFormMasterData } from "./validate";
+import { Button, cn, FormPanel, RenderField } from '@/shared';
+import {} from 'react-redux';
+import { useAppSelector } from '@/app';
+import { validateFormMasterData } from './validate';
 
 const FormMasterData = () => {
   const utility = useAppSelector((state) => state.utility);
@@ -10,9 +10,9 @@ const FormMasterData = () => {
   function onSubmit() {}
 
   return (
-    <div className={cn("grid gap-6")}>
+    <div className={cn('grid gap-6')}>
       <FormPanel
-        formName={"LoginForm"}
+        formName={'LoginForm'}
         onSubmit={onSubmit}
         validate={validateFormMasterData}
       >

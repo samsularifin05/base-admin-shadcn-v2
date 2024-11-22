@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Control, FieldValues, Path } from "react-hook-form";
-import { PasswordInput } from "../custom";
+import { Control, FieldValues, Path } from 'react-hook-form';
+import { PasswordInput } from '../custom';
 import {
   FormControl,
   FormField,
@@ -8,7 +8,7 @@ import {
   FormLabel,
   FormMessage,
   Input
-} from "../../";
+} from '../../';
 
 interface TypedFieldProps<FormValues extends FieldValues> {
   name: Path<FormValues>;

@@ -1,7 +1,7 @@
-import { AppDispatch, AppThunk, utilityActions } from "@/app";
-import { apiInstance, urlApi } from "@/shared";
-import { ResponseFormMasterDataDto } from "../model";
-import { setMasterData } from "../redux";
+import { AppDispatch, AppThunk, utilityActions } from '@/app';
+import { apiInstance, urlApi } from '@/shared';
+import { ResponseFormMasterDataDto } from '../model';
+import { setMasterData } from '../redux';
 
 export const serviceMasterData = () => {
   const getMasterData = (): AppThunk => {

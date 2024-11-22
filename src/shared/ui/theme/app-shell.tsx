@@ -1,7 +1,7 @@
-import { Outlet } from "react-router-dom";
-import Sidebar from "../navtiagtion/sidebar";
-import { ProtectedRoute } from "../panelAdmin/ProtectedRoute";
-import { useIsCollapsed } from "../../lib";
+import { Outlet } from 'react-router-dom';
+import Sidebar from '../navtiagtion/sidebar';
+import { ProtectedRoute } from '../panelAdmin/ProtectedRoute';
+import { useIsCollapsed } from '../../lib';
 
 export default function AppShell() {
   const [isCollapsed, setIsCollapsed] = useIsCollapsed();
@@ -12,7 +12,7 @@ export default function AppShell() {
         <main
           id="content"
           className={`overflow-x-hidden pt-16 transition-[margin] md:overflow-y-hidden md:pt-0 ${
-            isCollapsed ? "md:ml-14" : "md:ml-64"
+            isCollapsed ? 'md:ml-14' : 'md:ml-64'
           } h-full`}
         >
           <Outlet />

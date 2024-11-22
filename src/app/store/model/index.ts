@@ -3,7 +3,7 @@ import {
   FormMasterDataDto,
   intitalFormLogin,
   intitalFormMasterData
-} from "@/pages";
+} from '@/pages';
 
 export interface FormState {
   LoginForm: FormLoginDto;

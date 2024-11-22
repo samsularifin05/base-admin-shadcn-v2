@@ -1,5 +1,5 @@
-import { Avatar, AvatarFallback, AvatarImage } from "../avatar";
-import { Button } from "@/shared/ui/custom/button";
+import { Avatar, AvatarFallback, AvatarImage } from '../avatar';
+import { Button } from '@/shared/ui/custom/button';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -9,10 +9,10 @@ import {
   DropdownMenuSeparator,
   DropdownMenuShortcut,
   DropdownMenuTrigger
-} from "../dropdown-menu";
-import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { AppDispatch, themesActions } from "@/app";
+} from '../dropdown-menu';
+import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { AppDispatch, themesActions } from '@/app';
 
 export function UserNav() {
   const navigae = useNavigate();
@@ -21,7 +21,7 @@ export function UserNav() {
   const logout = () => {
     localStorage.clear();
     dispatch(themesActions.setIsLogin(false));
-    navigae("/");
+    navigae('/');
   };
   return (
     <DropdownMenu>

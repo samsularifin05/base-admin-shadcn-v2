@@ -4,7 +4,7 @@ export interface LocalStorageItem<T> {
 }
 
 export const getItem = <T>(nama: string): T => {
-  if (typeof window !== "undefined") {
+  if (typeof window !== 'undefined') {
     const item = localStorage.getItem(nama);
 
     if (item !== null) {
@@ -18,7 +18,7 @@ export const getItem = <T>(nama: string): T => {
 };
 
 export const setItem = <T>(nama: string, data: T) => {
-  if (typeof window !== "undefined") {
+  if (typeof window !== 'undefined') {
     const item: LocalStorageItem<T> = {
       nama: nama,
       data: data
@@ -28,7 +28,7 @@ export const setItem = <T>(nama: string, data: T) => {
 };
 
 export const removeItem = (nama: string) => {
-  if (typeof window !== "undefined") {
+  if (typeof window !== 'undefined') {
     localStorage.removeItem(nama);
   }
 };

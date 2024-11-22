@@ -1,8 +1,8 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { GetMasterDataDto, initialState } from "./type";
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { GetMasterDataDto, initialState } from './type';
 
 const masterDataReducer = createSlice({
-  name: "masterData",
+  name: 'masterData',
   initialState,
   reducers: {
     setMasterData(state, action: PayloadAction<GetMasterDataDto>) {

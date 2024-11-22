@@ -1,6 +1,6 @@
-import { useAppSelector } from "@/app";
-import React, { ReactNode } from "react";
-import { Navigate } from "react-router-dom";
+import { useAppSelector } from '@/app';
+import React, { ReactNode } from 'react';
+import { Navigate } from 'react-router-dom';
 
 interface ProtectedRouteProps {
   children: ReactNode;

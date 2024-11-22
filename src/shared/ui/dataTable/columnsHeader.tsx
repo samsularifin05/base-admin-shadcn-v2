@@ -6,14 +6,14 @@ import {
   DropdownMenuTrigger,
   Button,
   cn
-} from "@/shared";
-import { Column } from "@tanstack/react-table";
+} from '@/shared';
+import { Column } from '@tanstack/react-table';
 import {
   ArrowDownIcon,
   ArrowUpIcon,
   CaretSortIcon,
   EyeNoneIcon
-} from "@radix-ui/react-icons";
+} from '@radix-ui/react-icons';
 
 interface DataTableColumnHeaderProps<TData, TValue>
   extends React.HTMLAttributes<HTMLDivElement> {
@@ -26,19 +26,19 @@ export function DataTableColumnHeader<TData, TValue>({
   title,
   className
 }: DataTableColumnHeaderProps<TData, TValue>) {
-  const triggerClass = cn("-ml-3 h-8", {
-    "data-[state=open]:bg-accent": column.getIsSorted()
+  const triggerClass = cn('-ml-3 h-8', {
+    'data-[state=open]:bg-accent': column.getIsSorted()
   });
 
   return (
-    <div className={cn("flex items-center space-x-2", className)}>
+    <div className={cn('flex items-center space-x-2', className)}>
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
           <Button variant="ghost" size="sm" className={triggerClass}>
             <span>{title}</span>
-            {column.getIsSorted() === "desc" ? (
+            {column.getIsSorted() === 'desc' ? (
               <ArrowDownIcon className="w-4 h-4 ml-2" />
-            ) : column.getIsSorted() === "asc" ? (
+            ) : column.getIsSorted() === 'asc' ? (
               <ArrowUpIcon className="w-4 h-4 ml-2" />
             ) : (
               <CaretSortIcon className="w-4 h-4 ml-2" />

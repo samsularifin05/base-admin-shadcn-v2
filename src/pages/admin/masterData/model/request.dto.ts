@@ -3,5 +3,5 @@ export interface FormMasterDataDto {
 }
 
 export const intitalFormMasterData: FormMasterDataDto = {
-  name: ""
+  name: ''
 };

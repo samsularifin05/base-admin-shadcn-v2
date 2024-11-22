@@ -1,10 +1,9 @@
 export const urlApi = {
-  auth: "auth/login",
+  auth: 'auth/login',
   masterData: {
-    user: "users",
-    jenis: "jenis",
-    kategori: "kategori"
-  }
-,
-  masterkuda:"masterkuda",
+    user: 'users',
+    jenis: 'jenis',
+    kategori: 'kategori'
+  },
+  masterkuda: 'masterkuda'
 };

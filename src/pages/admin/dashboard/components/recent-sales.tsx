@@ -1,4 +1,4 @@
-import { Avatar, AvatarFallback, AvatarImage } from "@/shared";
+import { Avatar, AvatarFallback, AvatarImage } from '@/shared';
 
 export function RecentSales() {
   return (

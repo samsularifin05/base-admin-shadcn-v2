@@ -1,6 +1,6 @@
-import { AppDispatch, AppThunk, themesActions, utilityActions } from "@/app";
-import { ToastNotificationInfo } from "@/shared";
-import { setItem } from "@/shared";
+import { AppDispatch, AppThunk, themesActions, utilityActions } from '@/app';
+import { ToastNotificationInfo } from '@/shared';
+import { setItem } from '@/shared';
 
 export const loginAction = (): AppThunk => {
   return async (dispatch: AppDispatch, getState) => {
@@ -9,8 +9,8 @@ export const loginAction = (): AppThunk => {
     dispatch(utilityActions.setLoading({ screen: true }));
     try {
       dispatch(utilityActions.setLoading({ screen: true }));
-      if (data.user_id === "admin@gmail.com" && data.password === "admin1234") {
-        setItem("userdata", data);
+      if (data.user_id === 'admin@gmail.com' && data.password === 'admin1234') {
+        setItem('userdata', data);
         dispatch(themesActions.setIsLogin(true));
         dispatch(utilityActions.stopLoading());
       }

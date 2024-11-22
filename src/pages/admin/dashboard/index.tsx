@@ -10,10 +10,9 @@ import {
   TabsContent,
   TabsList,
   TabsTrigger
-} from "@/shared";
-import { Overview } from "./components/overview";
-import { RecentSales } from "./components/recent-sales";
-
+} from '@/shared';
+import { Overview } from './components/overview';
+import { RecentSales } from './components/recent-sales';
 
 const Dashboard = () => {
   return (

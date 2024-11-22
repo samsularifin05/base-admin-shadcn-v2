@@ -1,9 +1,9 @@
-import { useDispatch } from "react-redux";
-import { useEffect } from "react";
-import { DataTable } from "@/shared";
-import columns from "./columns";
-import { AppDispatch, useAppSelector } from "@/app";
-import { serviceMasterData } from "../../service";
+import { useDispatch } from 'react-redux';
+import { useEffect } from 'react';
+import { DataTable } from '@/shared';
+import columns from './columns';
+import { AppDispatch, useAppSelector } from '@/app';
+import { serviceMasterData } from '../../service';
 
 const TableMasterData = () => {
   const dispatch = useDispatch<AppDispatch>();

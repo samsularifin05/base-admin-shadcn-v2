@@ -1,4 +1,4 @@
-import { ResponseFormMasterDataDto } from "../model";
+import { ResponseFormMasterDataDto } from '../model';
 
 export interface GetMasterDataDto {
   data: ResponseFormMasterDataDto[];

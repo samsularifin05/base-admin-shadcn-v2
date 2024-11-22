@@ -1,4 +1,4 @@
-import LoginForm from "./ui";
+import LoginForm from './ui';
 
-export * from "./model";
+export * from './model';
 export { LoginForm };

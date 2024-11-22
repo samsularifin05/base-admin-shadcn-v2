@@ -1,4 +1,4 @@
-import MasterData from "./formMasterData";
+import MasterData from './formMasterData';
 
-export * from "./form";
+export * from './form';
 export { MasterData };

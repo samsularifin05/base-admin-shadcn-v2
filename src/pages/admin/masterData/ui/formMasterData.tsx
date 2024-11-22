@@ -1,7 +1,7 @@
-import { ModalGlobal, PanelAdmin } from "@/shared";
-import FormMasterData from "./form";
-import { useAppSelector } from "@/app";
-import TableMasterData from "./table";
+import { ModalGlobal, PanelAdmin } from '@/shared';
+import FormMasterData from './form';
+import { useAppSelector } from '@/app';
+import TableMasterData from './table';
 
 const MasterData = () => {
   const modal = useAppSelector((state) => state.utility.getModal);
@@ -10,9 +10,9 @@ const MasterData = () => {
     <PanelAdmin>
       <TableMasterData />
       <ModalGlobal
-        title={`${modal.isEdit ? "Edit" : "Tambah"} Data`}
+        title={`${modal.isEdit ? 'Edit' : 'Tambah'} Data`}
         size="medium"
-        namaForm={"FormMasterData"}
+        namaForm={'FormMasterData'}
       >
         <FormMasterData />
       </ModalGlobal>
