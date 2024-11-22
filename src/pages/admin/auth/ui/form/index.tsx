@@ -19,7 +19,7 @@ const FormLogin = () => {
   // This useEffect updates the initial form values to simulate pre-filled data
   useEffect(() => {
     dispatch(
-      formActions.updateForm({
+      formActions.setValue({
         form: "LoginForm",
         values: {
           user_id: "admin@gmail.com",

@@ -54,9 +54,7 @@ const FormPanel = <FormValues extends FieldValues>({
     const watchSubscription = form.watch(async (values) => {
       try {
         const validValues = await validate.validate(values);
-        dispatch(
-          formActions.updateForm({ form: formName, values: validValues })
-        );
+        dispatch(formActions.setValue({ form: formName, values: validValues }));
       } catch (error) {
         console.log(error);
       }
